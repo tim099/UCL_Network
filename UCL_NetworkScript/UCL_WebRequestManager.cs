@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 namespace UCL.NetworkLib {
-    #region FileHandle
-    public class FileHandle {
-        public FileHandle() {
+    #region BundleHandle
+    public class BundleHandle {
+        public BundleHandle() {
             m_LoadEnd = false;
             m_LoadError = false;
         }
@@ -43,8 +43,8 @@ namespace UCL.NetworkLib {
 
         Dictionary<string, AssetBundle> m_BundleDic = new Dictionary<string, AssetBundle>();
 
-        public FileHandle LoadBundle(string path, System.Action LoadEndAct = null) {
-            FileHandle file = new FileHandle();
+        public BundleHandle LoadBundle(string path, System.Action LoadEndAct = null) {
+            BundleHandle file = new BundleHandle();
             file.m_LoadEndAct = LoadEndAct;
             file.m_LoadPath = path;
             if(m_BundleDic.ContainsKey(path)) {
@@ -64,7 +64,7 @@ namespace UCL.NetworkLib {
             m_BundleDic.Remove(path);
             bundle.Unload(true);
         }
-        private IEnumerator WebRequestLoadBundle(string path, FileHandle file) {
+        private IEnumerator WebRequestLoadBundle(string path, BundleHandle file) {
             Debug.LogWarning("WebRequestLoad:" + path);
 
             var www = UnityEngine.Networking.UnityWebRequestAssetBundle.GetAssetBundle(path);
