@@ -72,7 +72,9 @@ namespace UCL.NetworkLib {
             file.m_UnityWebRequest = www;
             //DownloadHandlerAssetBundle handler = new DownloadHandlerAssetBundle(www.url, uint.MaxValue);
             //www.downloadHandler = handler;
-            yield return www.SendWebRequest();
+            UnityWebRequestAsyncOperation request_opt = www.SendWebRequest();
+            
+            yield return request_opt;
 
             if(www.isNetworkError || www.isHttpError) {
                 Debug.LogError("LoadByWebRequest Error:" + path + ",Error:" + www.error);
