@@ -38,11 +38,7 @@ namespace UCL.NetworkLib.Demo {
             long file_size = 0;
             ///Get Header
             using(var headRequest = UnityWebRequest.Head(download_path)) {
-                //yield return headRequest.SendWebRequest();
-                var header = headRequest.SendWebRequest();
-                while(!header.isDone) {
-                    yield return null;
-                }
+                yield return headRequest.SendWebRequest();
                 if(headRequest.responseCode == 200) {
                     var contentLength = headRequest.GetResponseHeader("CONTENT-LENGTH");
                     long.TryParse(contentLength, out file_size);
@@ -56,10 +52,7 @@ namespace UCL.NetworkLib.Demo {
             var www = UnityEngine.Networking.UnityWebRequest.Get(download_path);
             UnityWebRequestAsyncOperation request_opt = www.SendWebRequest();
 
-            while(!request_opt.isDone) {
-                yield return null;
-            }
-            //yield return request_opt;
+            yield return request_opt;
 
             if(www.isNetworkError || www.isHttpError) {
                 Debug.LogError("LoadByWebRequest Error:" + download_path + ",Error:" + www.error);
@@ -80,11 +73,11 @@ namespace UCL.NetworkLib.Demo {
         [UCL.Core.ATTR.UCL_FunctionButton]
         public void EditorDownload() {
             EditorStopCoroutine();
-            m_Player = Core.EditorLib.UCL_EditorCoroutineManager.StartCoroutine(WebRequestLoad(DownloadPath, SavePath));
+            m_Player = Core.EnumeratorLib.UCL_CoroutineManager.StartCoroutine(WebRequestLoad(DownloadPath, SavePath));
         }
         [UCL.Core.ATTR.UCL_FunctionButton]
         public void EditorStopCoroutine() {
-            Core.EditorLib.UCL_EditorCoroutineManager.StopCoroutine(m_Player);
+            Core.EnumeratorLib.UCL_CoroutineManager.StopCoroutine(m_Player);
         }
 #endif
     }
