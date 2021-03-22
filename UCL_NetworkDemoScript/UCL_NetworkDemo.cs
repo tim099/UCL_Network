@@ -17,7 +17,7 @@ namespace UCL.NetworkLib.Demo {
             get {
                 string path = Application.persistentDataPath;
 #if UNITY_EDITOR
-                if(m_Folder != null) path = UnityEditor.AssetDatabase.GetAssetPath(m_Folder);
+                if(m_Folder != null) path = UCL.Core.EditorLib.AssetDatabaseMapper.GetAssetPath(m_Folder);
 #endif
                 return path;
             }
@@ -60,7 +60,7 @@ namespace UCL.NetworkLib.Demo {
                 var results = www.downloadHandler.data;
                 File.WriteAllBytes(save_path, results);
 #if UNITY_EDITOR
-                UnityEditor.AssetDatabase.Refresh();
+                UCL.Core.EditorLib.AssetDatabaseMapper.Refresh();
 #endif
 #if UNITY_EDITOR_WIN
                 Core.FileLib.WindowsLib.OpenAssetExplorer(save_path);

@@ -19,14 +19,14 @@ namespace UCL.NetworkLib {
         public void StartDownload() {
 #if UNITY_EDITOR
             if(string.IsNullOrEmpty(m_SaveFolder)) {
-                var path = UnityEditor.AssetDatabase.GetAssetPath(this);
+                var path = UCL.Core.EditorLib.AssetDatabaseMapper.GetAssetPath(this);
                 m_SaveFolder = Core.FileLib.Lib.RemoveFolderPath(path, 1);
             }
 #endif
             UCL.Core.EnumeratorLib.UCL_CoroutineManager.StartCoroutine(WebRequestDownload(m_DownloadPath, delegate(byte[] data) {
                 File.WriteAllBytes(SavePath, data);
 #if UNITY_EDITOR
-                UnityEditor.AssetDatabase.Refresh();
+                UCL.Core.EditorLib.AssetDatabaseMapper.Refresh();
 #endif
 #if UNITY_EDITOR_WIN
                 Core.FileLib.WindowsLib.OpenAssetExplorer(SavePath);
