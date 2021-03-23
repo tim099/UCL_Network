@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2d4841cbab8a1a4fb8ba82f2a464ec9, type: 3}
-  m_Name: FileDownloaderDemo
+  m_Script: {fileID: 11500000, guid: 582f7efcbff0e9b41ba0e90a32dc2a30, type: 3}
+  m_Name: CsvDownloaderDemo
   m_EditorClassIdentifier: 
-  m_DownloadPath: https://docs.google.com/spreadsheets/d/1zLXwb8ASmI0B5_GxuUtQUopPFEOE29K18jp9mC9Auxo/export?format=csv&gid=0
+  m_TableId: 1zLXwb8ASmI0B5_GxuUtQUopPFEOE29K18jp9mC9Auxo
+  m_SheetId: 0
   m_SaveFolder: Assets/UCL/UCL_Modules/UCL_Network/UCL_NetworkDemo
-  m_FileName: download.txt
+  m_FileName: Localize.txt

@@ -1,0 +1,7 @@
+Key,Chinese,English
+NewGame,開始遊戲,New Game
+Continue,繼續遊戲,Continue
+Options,選項,Options
+LanguageSettings,語言,Language
+SaveGame,存檔,Save Game
+LoadGame,讀檔,Load Game
