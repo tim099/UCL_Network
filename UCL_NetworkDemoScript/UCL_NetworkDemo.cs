@@ -53,18 +53,25 @@ namespace UCL.NetworkLib.Demo {
             UnityWebRequestAsyncOperation request_opt = www.SendWebRequest();
 
             yield return request_opt;
-
-            if(www.isNetworkError || www.isHttpError) {
-                Debug.LogError("LoadByWebRequest Error:" + download_path + ",Error:" + www.error);
-            } else {
-                var results = www.downloadHandler.data;
-                File.WriteAllBytes(save_path, results);
+            switch (www.result)
+            {
+                case UnityWebRequest.Result.Success:
+                    {
+                        var results = www.downloadHandler.data;
+                        File.WriteAllBytes(save_path, results);
 #if UNITY_EDITOR
-                UCL.Core.EditorLib.AssetDatabaseMapper.Refresh();
+                        UCL.Core.EditorLib.AssetDatabaseMapper.Refresh();
 #endif
 #if UNITY_EDITOR_WIN
-                Core.FileLib.WindowsLib.OpenAssetExplorer(save_path);
+                        Core.FileLib.WindowsLib.OpenAssetExplorer(save_path);
 #endif
+                        break;
+                    }
+                default://Error
+                    {
+                        Debug.LogError("LoadByWebRequest Error Path:" + download_path +",Result:"+ www.result + ",Error:" + www.error);
+                        break;
+                    }
             }
         }
 #if UNITY_EDITOR
