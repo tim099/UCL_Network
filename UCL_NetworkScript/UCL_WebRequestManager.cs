@@ -76,8 +76,8 @@ namespace UCL.NetworkLib {
             
             yield return request_opt;
 
-            if(www.isNetworkError || www.isHttpError) {
-                Debug.LogError("LoadByWebRequest Error:" + path + ",Error:" + www.error);
+            if(www.result != UnityWebRequest.Result.Success) {
+                Debug.LogError("LoadByWebRequest Error:" + path + ",Error:" + www.error+ ",www.result:"+ www.result);
                 file.m_LoadError = true;
             } else {
                 var bundle = (www.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
